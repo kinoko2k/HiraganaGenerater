@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>カタカナ変換ツール</title>
+        <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f8f8f8;
+      }
+      h1 {
+        text-align: center;
+        font-size: 2em;
+        margin-top: 50px;
+        margin-bottom: 20px;
+      }
+      p {
+        font-size: 1.2em;
+        margin-left: 20px;
+      }
+      textarea {
+        display: block;
+        margin: 0 auto;
+        width: 80%;
+        height: 200px;
+        padding: 10px;
+        font-size: 1.2em;
+        border-radius: 10px;
+        border: 2px solid #ccc;
+        resize: none;
+      }
+      button {
+        display: block;
+        margin: 20px auto;
+        padding: 10px 20px;
+        font-size: 1.2em;
+        font-weight: bold;
+        border-radius: 10px;
+        border: none;
+        background-color: #4CAF50;
+        color: white;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+      button:hover {
+        background-color: #3E8E41;
+      }
+      #result {
+        margin: 20px auto;
+        width: 80%;
+        height: 200px;
+        padding: 10px;
+        font-size: 1.2em;
+        border-radius: 10px;
+        border: 2px solid #ccc;
+        overflow-y: scroll;
+      }
+      .result-1 {
+        color: #ccc;
+      }
+    </style>
+    <script>
+      function convertToHiragana() {
+        var inputText = document.getElementById("inputText").value;
+
+        // かたかな
+        var hiraganaText = inputText.replace(/[\u3041-\u3096]/g, function(match) {
+          var chr = match.charCodeAt(0) + 0x60;
+          return String.fromCharCode(chr);
+        });
+
+        document.getElementById("result").innerHTML = hiraganaText;
+      }
+    </script>
+  </head>
+  <body>
+    <h1>カタカナ変換ツール</h1>
+    <p>文章を入力してください。</p>
+    <textarea id="inputText" rows="5" cols="50"></textarea>
+    <br>
+    <button onclick="convertToHiragana()">カタカナ変換</button>
+    <br>
+    <div id="result"><p class="result-1">結果がここに表示されます。</p></div>
+  </body>
+</html>
