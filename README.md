@@ -1,1 +1,2 @@
-# HiraganaGenerater
+# SentenceGenerator
+ひらがなからカタカナへ、そして、カタカナからひらがなへ
