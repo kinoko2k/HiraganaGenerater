@@ -55,6 +55,16 @@
         border: 2px solid #ccc;
         overflow-y: scroll;
       }
+      #result-kata {
+        margin: 20px auto;
+        width: 80%;
+        height: 200px;
+        padding: 10px;
+        font-size: 1.2em;
+        border-radius: 10px;
+        border: 2px solid #ccc;
+        overflow-y: scroll;
+      }
       .result-1 {
         color: #ccc;
       }
@@ -64,22 +74,42 @@
         var inputText = document.getElementById("inputText").value;
 
         // かたかな
-        var hiraganaText = inputText.replace(/[\u3041-\u3096]/g, function(match) {
+        var hiraganaText = inputText.replace(/[\u3041-\u3096]/g, ch => String.fromCharCode(ch.charCodeAt(0) + 0x60), function(match) {
           var chr = match.charCodeAt(0) + 0x60;
           return String.fromCharCode(chr);
         });
 
         document.getElementById("result").innerHTML = hiraganaText;
       }
+      function convertToKatakana() {
+        var inputText = document.getElementById("inputText-kata").value;
+
+        // ひらがな
+        var KatakanaText = inputText.replace(/[\u30A1-\u30FA]/g, ch => String.fromCharCode(ch.charCodeAt(0) - 0x60), function(match) {
+          var kr = match.charCodeAt(0) + 0x60;
+          return String.fromCharCode(kr);
+        });
+
+        document.getElementById("result-kata").innerHTML = KatakanaText;
+      }
     </script>
   </head>
   <body>
-    <h1>カタカナ変換ツール</h1>
+    <h1>ひらがな→カタカナ変換ツール</h1>
     <p>文章を入力してください。</p>
     <textarea id="inputText" rows="5" cols="50"></textarea>
     <br>
     <button onclick="convertToHiragana()">カタカナ変換</button>
     <br>
     <div id="result"><p class="result-1">結果がここに表示されます。</p></div>
+  </body>
+  <body>
+    <h1>カタカナ→ひらがな変換ツール</h1>
+    <p>文章を入力してください。</p>
+    <textarea id="inputText-kata" rows="5" cols="50"></textarea>
+    <br>
+    <button onclick="convertToKatakana()">ひらがな変換</button>
+    <br>
+    <div id="result-kata"><p class="result-1">結果がここに表示されます。</p></div>
   </body>
 </html>
