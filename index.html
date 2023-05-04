@@ -94,6 +94,26 @@
 
         document.getElementById("result-kata").innerHTML = KatakanaText;
       }
+    function convert() {
+      var input = document.getElementById("input").value;
+      var output = convertToHiragana(input);
+      document.getElementById("output").value = output;
+    }
+
+    function convertToHiragana(str) {
+      var result = "";
+      for (var i = 0; i < str.length; i++) {
+        var code = str.charCodeAt(i);
+        if (code >= 0x4E00 && code <= 0x9FFF) {
+          result += String.fromCharCode(code + 0x60);
+        } else if (code >= 0x30A0 && code <= 0x30FF) {
+          result += String.fromCharCode(code - 0x60);
+        } else {
+          result += str[i];
+        }
+      }
+      return result;
+    }
     </script>
   </head>
   <body>
@@ -113,5 +133,14 @@
     <button onclick="convertToKatakana()">ひらがな変換</button>
     <br>
     <div id="result-kata"><p class="result-1">結果がここに表示されます。</p></div>
+  </body>
+  <body>
+    <h1>漢字→ひらがな変換ツール</h1>
+    <p>文章を入力してください。</p>
+    <textarea id="input" rows="10" cols="50"></textarea>
+    <br>
+    <button onclick="convert()">ひらがな変換</button>
+    <br>
+    <textarea id="output" rows="10" cols="50" readonly><p class="result-1">結果がここに表示されます。</p></textarea>
   </body>
 </html>
